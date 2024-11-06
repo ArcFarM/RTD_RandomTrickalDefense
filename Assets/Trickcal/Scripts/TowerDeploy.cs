@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class Tower_Placement : MonoBehaviour
 {
-    //¼³Ä¡ Ä­ À§¿¡ ¸¶¿ì½º¸¦ ¿Ã¸®°í q¹öÆ°À» ´©¸£¸é Å¸¿ö ¼³Ä¡
-    //Ä­ À§¿¡ ¸¶¿ì½º¸¦ ¿Ã¸®°í w¹öÆ°À» ´©¸£¸é ±× Ä­À» ±âÁØÀ¸·Î µ¿ÀÏÇÑ Å¸¿ö¸¦ ÇÏ³ª ÇÕ¼ºÇÏ¿© ´õ ³ôÀº µî±ÞÀÇ Å¸¿ö¸¦ ±× ÀÚ¸®¿¡ ¹«ÀÛÀ§ »ý¼º
-    //e¹öÆ°À» ´©¸£¸é µ·À» Á¦ÀÛºñÀÇ ¹Ý°ªÀ» ÁÖ°í ÆÇ¸Å
-    //¼±ÅÃÅ¸¿ö °Ç¼³ ¹öÆ°À» ´©¸£¸é Å¸¿ö ¼±ÅÃ ¸ñ·ÏÀÌ ³ª¿À°í, ±×°É Å¬¸¯ÇÏ°í Ä­À» Å¬¸¯ÇÏ¸é ¼±ÅÃ Å¸¿ö ¼³Ä¡
+    //ì„¤ì¹˜ ì¹¸ ìœ„ì— ë§ˆìš°ìŠ¤ë¥¼ ì˜¬ë¦¬ê³  që²„íŠ¼ì„ ëˆ„ë¥´ë©´ íƒ€ì›Œ ì„¤ì¹˜
+    //ì¹¸ ìœ„ì— ë§ˆìš°ìŠ¤ë¥¼ ì˜¬ë¦¬ê³  wë²„íŠ¼ì„ ëˆ„ë¥´ë©´ ê·¸ ì¹¸ì„ ê¸°ì¤€ìœ¼ë¡œ ë™ì¼í•œ íƒ€ì›Œë¥¼ í•˜ë‚˜ í•©ì„±í•˜ì—¬ ë” ë†’ì€ ë“±ê¸‰ì˜ íƒ€ì›Œë¥¼ ê·¸ ìžë¦¬ì— ë¬´ìž‘ìœ„ ìƒì„±
+    //eë²„íŠ¼ì„ ëˆ„ë¥´ë©´ ëˆì„ ì œìž‘ë¹„ì˜ ë°˜ê°’ì„ ì£¼ê³  íŒë§¤
+    //ì„ íƒíƒ€ì›Œ ê±´ì„¤ ë²„íŠ¼ì„ ëˆ„ë¥´ë©´ íƒ€ì›Œ ì„ íƒ ëª©ë¡ì´ ë‚˜ì˜¤ê³ , ê·¸ê±¸ í´ë¦­í•˜ê³  ì¹¸ì„ í´ë¦­í•˜ë©´ ì„ íƒ íƒ€ì›Œ ì„¤ì¹˜
     // Start is called before the first frame update
 
-    //Å¸¿ö »óÈ£ÀÛ¿ë°ú ¸¶¿ì½º ¿Ã¶ó°¡ ÀÖ´Â °ÍÀ» °¨ÁöÇÏ±â À§ÇÑ ÇÃ·¡±×
+    //íƒ€ì›Œ ìƒí˜¸ìž‘ìš©ê³¼ ë§ˆìš°ìŠ¤ ì˜¬ë¼ê°€ ìžˆëŠ” ê²ƒì„ ê°ì§€í•˜ê¸° ìœ„í•œ í”Œëž˜ê·¸
     bool tower_build_flag = false;
     bool tower_upgrade_flag = false;
     bool tower_sell_flag = false;
@@ -22,23 +22,23 @@ public class Tower_Placement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //q,w,e¸¦ ´©¸£¸é Å¸¿ö ¼³Ä¡ °¡´É/Å¸¿ö ÇÕ¼º °¡´É/Å¸¿ö ÆÇ¸Å °¡´É Áö¿ªÀÌ ºû³ª±â
-        //±×¸®°í °¡´ÉÇÑ Áö¿ª¿¡ Å¬¸¯À» ÇÏ¸é ¿ªÇÒÀ» ¼öÇàÇÏ°í, ±×·¸Áö ¾ÊÀ¸¸é Ãë¼Ò
+        //q,w,eë¥¼ ëˆ„ë¥´ë©´ íƒ€ì›Œ ì„¤ì¹˜ ê°€ëŠ¥/íƒ€ì›Œ í•©ì„± ê°€ëŠ¥/íƒ€ì›Œ íŒë§¤ ê°€ëŠ¥ ì§€ì—­ì´ ë¹›ë‚˜ê¸°
+        //ê·¸ë¦¬ê³  ê°€ëŠ¥í•œ ì§€ì—­ì— í´ë¦­ì„ í•˜ë©´ ì—­í• ì„ ìˆ˜í–‰í•˜ê³ , ê·¸ë ‡ì§€ ì•Šìœ¼ë©´ ì·¨ì†Œ 
         if (Input.GetKey(KeyCode.Q))
         {
             if (!is_tower_built)
             {
-                //Å¸¿ö ¼³Ä¡ °¡´É Áö¿ª ºû³ª±â
+                //íƒ€ì›Œ ì„¤ì¹˜ ê°€ëŠ¥ ì§€ì—­ ë¹›ë‚˜ê¸°
                 tower_build_flag = true;
             }
-            //Å¸¿ö¸¦ ¼³Ä¡ÇÒ ¼ö ÀÖ´Â Áö¿ª¿¡ ¸¶¿ì½º¸¦ ¿Ã¸®°í ÀÖ°í
+            //íƒ€ì›Œë¥¼ ì„¤ì¹˜í•  ìˆ˜ ìžˆëŠ” ì§€ì—­ì— ë§ˆìš°ìŠ¤ë¥¼ ì˜¬ë¦¬ê³  ìžˆê³ 
             if(tower_build_flag && mouse_over_flag)
             {
-                //±× Áö¿ª¿¡¼­ ¹Ù·Î ¸¶¿ì½º¸¦ ´©¸£¸é
+                //ê·¸ ì§€ì—­ì—ì„œ ë°”ë¡œ ë§ˆìš°ìŠ¤ë¥¼ ëˆ„ë¥´ë©´
                 if (Input.GetMouseButton(0))
                 {
-                    //Å¸¿ö °Ç¼³ ¼öÇà
-                    //°Ç¼³ ¼öÇà ÈÄ ÇÃ·¡±× ²ô±â
+                    //íƒ€ì›Œ ê±´ì„¤ ìˆ˜í–‰
+                    //ê±´ì„¤ ìˆ˜í–‰ í›„ í”Œëž˜ê·¸ ë„ê¸°
                     tower_build_flag = false;
                     is_tower_built=true;
                 }
@@ -47,19 +47,19 @@ public class Tower_Placement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.W))
         {
-            //Å¸¿ö°¡ Á¸ÀçÇÏ°í, °°Àº Å¸¿ö°¡ ÀÖ´Ù¸é È°¼ºÈ­ Á¶°Ç
+            //íƒ€ì›Œê°€ ì¡´ìž¬í•˜ê³ , ê°™ì€ íƒ€ì›Œê°€ ìžˆë‹¤ë©´ í™œì„±í™” ì¡°ê±´
             {
-                //Å¸¿ö ÇÕ¼º °¡´É Áö¿ª ºû³ª±â
+                //íƒ€ì›Œ í•©ì„± ê°€ëŠ¥ ì§€ì—­ ë¹›ë‚˜ê¸°
                 tower_upgrade_flag = true;
             }
-            //Å¸¿ö¸¦ ÇÕ¼ºÇÒ ¼ö ÀÖ´Â Áö¿ª¿¡ ¸¶¿ì½º¸¦ ¿Ã¸®°í ÀÖ°í
+            //íƒ€ì›Œë¥¼ í•©ì„±í•  ìˆ˜ ìžˆëŠ” ì§€ì—­ì— ë§ˆìš°ìŠ¤ë¥¼ ì˜¬ë¦¬ê³  ìžˆê³ 
             if (tower_upgrade_flag && mouse_over_flag)
             {
-                //±× Áö¿ª¿¡¼­ ¹Ù·Î ¸¶¿ì½º¸¦ ´©¸£¸é
+                //ê·¸ ì§€ì—­ì—ì„œ ë°”ë¡œ ë§ˆìš°ìŠ¤ë¥¼ ëˆ„ë¥´ë©´
                 if (Input.GetMouseButton(0))
                 {
-                    //Å¸¿ö ÇÕ¼º ¼öÇà
-                    //ÇÃ·¡±× ²ô±â
+                    //íƒ€ì›Œ í•©ì„± ìˆ˜í–‰
+                    //í”Œëž˜ê·¸ ë„ê¸°
                     tower_upgrade_flag=false;
                 }
             }
@@ -68,17 +68,17 @@ public class Tower_Placement : MonoBehaviour
         {
             if (is_tower_built)
             {
-                //Å¸¿ö ÆÇ¸Å °¡´É Áö¿ª ºû³ª±â
+                //íƒ€ì›Œ íŒë§¤ ê°€ëŠ¥ ì§€ì—­ ë¹›ë‚˜ê¸°
                 tower_sell_flag = true;
             }
-            //Å¸¿ö¸¦ ÆÇ¸ÅÇÒ ¼ö ÀÖ´Â Áö¿ª¿¡ ¸¶¿ì½º¸¦ ¿Ã¸®°í ÀÖ°í
+            //íƒ€ì›Œë¥¼ íŒë§¤í•  ìˆ˜ ìžˆëŠ” ì§€ì—­ì— ë§ˆìš°ìŠ¤ë¥¼ ì˜¬ë¦¬ê³  ìžˆê³ 
             if (tower_sell_flag && mouse_over_flag)
             {
-                //±× Áö¿ª¿¡¼­ ¹Ù·Î ¸¶¿ì½º¸¦ ´©¸£¸é
+                //ê·¸ ì§€ì—­ì—ì„œ ë°”ë¡œ ë§ˆìš°ìŠ¤ë¥¼ ëˆ„ë¥´ë©´
                 if (Input.GetMouseButton(0))
                 {
-                    //Å¸¿ö ÆÇ¸Å ¼öÇà
-                    //ÇÃ·¡±× ²ô±â
+                    //íƒ€ì›Œ íŒë§¤ ìˆ˜í–‰
+                    //í”Œëž˜ê·¸ ë„ê¸°
                     tower_sell_flag = false;
                     is_tower_built = false;
                 }
@@ -86,8 +86,8 @@ public class Tower_Placement : MonoBehaviour
         }
     }
 
-    //¿ÀºêÁ§Æ®¿¡ ¸¶¿ì½º¸¦ ¿Ã¸®°í ÀÖ¾î¾ß ¼³Ä¡°¡ °¡´É
-    //¸¶¿ì½º¸¦ ¿Ã¸®°í ÀÖ´Â Áö ¾ø´Â Áö ÆÇ´ÜÇÏ´Â ¿ëµµ
+    //ì˜¤ë¸Œì íŠ¸ì— ë§ˆìš°ìŠ¤ë¥¼ ì˜¬ë¦¬ê³  ìžˆì–´ì•¼ ì„¤ì¹˜ê°€ ê°€ëŠ¥
+    //ë§ˆìš°ìŠ¤ë¥¼ ì˜¬ë¦¬ê³  ìžˆëŠ” ì§€ ì—†ëŠ” ì§€ íŒë‹¨í•˜ëŠ” ìš©ë„
     void OnMouseOver()
     {
         mouse_over_flag = true;

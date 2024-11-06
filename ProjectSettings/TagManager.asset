@@ -9,6 +9,8 @@ TagManager:
   - Tower
   - Spell
   - Artifact
+  - Tower_Deploy
+  - Waypoint
   layers:
   - Default
   - TransparentFX
