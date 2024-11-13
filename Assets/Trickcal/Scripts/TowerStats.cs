@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class TowerStats : MonoBehaviour
@@ -10,19 +11,29 @@ public class TowerStats : MonoBehaviour
     //공격력, 공격 속도(초당 공격 속도), 사거리, 스킬 쿨타임, 스킬 계수
     //스탯은 +와 %로 구분할 것
 
-    //공격력, 공격력 + 증가량, 최종 공격력 
-    public int dmg_fir = 0; public double dmg_sec = 1.0, total_dmg = 0;
-    //공격 속도, 공격 속도 증가량, 최종 공격 속도
-    public double spd_fir = 0, spd_sec = 1.0, total_spd = 0;
-    //사거리, 사거리 증가량, 최종 사거리
-    public double range_fir = 0, range_sec = 1.0, total_range = 0;
-    //스킬 쿨타임, 스킬 쿨타임 증가/감소량, 최종 스킬 쿨타임
-    public double cd_fir = 0, cd_sec = 1.0, total_cd = 0;
-    //스킬 계수, 스킬 계수 증가/감소량, 최종 스킬 계수
-    public double skill_fir = 0, skill_sec = 1.0, total_skill = 0;
+    //열거형
+
+    static int stats_size = 15;
+    public enum Stats
+    {
+        //순서대로 공격력, 공격속도, 사거리, 쿨타임, 스킬 계수
+        //순서대로 현재 기본수치, +증가량, %증가량(배수), 최종 수치
+        dmg, dmg_plus, dmg_pcnt, dmg_total,
+        spd, spd_plus, spd_pcnt, spd_total,
+        rng, rng_plus, rng_pcnt, rng_total,
+        cd, cd_plus, cd_pcnt, cd_total,
+        skl, skl_plus, skl_pcnt, skl_total,
+    }
+
+    public List<object> stats = new List<object>();
+
     void Start()
     {
-        
+        //타워 스탯 초기화
+        for(int i = 0; i < stats_size; i++)
+        {
+            stats.Add(0.0);
+        }   
     }
 
     // Update is called once per frame
@@ -31,91 +42,26 @@ public class TowerStats : MonoBehaviour
         
     }
 
-    //공격력 증감
-    void set_dmg(int flag, int fir, double sec)
+    object get_stat(int num)
     {
-        switch (flag)
-        {
-            //데미지 수치 증가
-            case 0:
-                dmg_fir += fir;
-                total_dmg = dmg_fir * dmg_sec;
-                break;
-            //데미지 배수 증가
-            case 1:
-                dmg_sec+= sec;
-                total_dmg = dmg_fir * dmg_sec;
-                break;
-        }
-    }
-    //공격 속도 증감
-    void set_spd(int flag, int fir, double sec)
-    {
-        switch (flag)
-        {
-            //데미지 수치 증가
-            case 0:
-                spd_fir += fir;
-                total_spd = spd_fir * spd_sec;
-                break;
-            //데미지 배수 증가
-            case 1:
-                spd_sec += sec;
-                total_spd = spd_fir * spd_sec;
-                break;
-        }
-    }
-    //사거리 증감
-    void set_range(int flag, int fir, double sec)
-    {
-        switch (flag)
-        {
-            //데미지 수치 증가
-            case 0:
-                range_fir += fir;
-                total_range = range_fir * range_sec;
-                break;
-            //데미지 배수 증가
-            case 1:
-                range_sec += sec;
-                total_range = range_fir * range_sec;
-                break;
-        }
-    }
-    //쿨타임 증감
-    void set_cd(int flag, int fir, double sec)
-    {
-        switch (flag)
-        {
-            //데미지 수치 증가
-            case 0:
-                cd_fir += fir;
-                total_cd = cd_fir * cd_sec;
-                break;
-            //데미지 배수 증가
-            case 1:
-                cd_sec += sec;
-                total_cd = cd_fir * cd_sec;
-                break;
-        }
-    }
-    //계수 증감
-    void set_skill(int flag, int fir, double sec)
-    {
-        switch (flag)
-        {
-            //데미지 수치 증가
-            case 0:
-                skill_fir += fir;
-                total_skill = skill_fir * skill_sec;
-                break;
-            //데미지 배수 증가
-            case 1:
-                skill_sec += sec;
-                total_skill = skill_fir * skill_sec;
-                break;
-        }
+        return stats[num];
     }
 
+    //배율 조정을 할 것인지 여부, 조정할 스탯, 증가할 고정 수치, 증가할 배율
+    void set_stat(bool flag, int index, object fir, object sec)
+    {
+        //flag = false면 배율 계산을 무시한다
+        if (!flag) sec = 0;
+        //0 공격 1 공속 2 사거리 3 쿨타임 4 스킬 계수
+        if (index != 0) index = index * 4;
+        //고정 수치 증가
+        stats[index + 1] = (double)stats[index + 1] + (double)fir;
+        //배율 증가
+        stats[index + 2] = (double)stats[index + 2] + (double)sec;
+        //최종 수치 재계산
+        stats[index + 3] = ((double)stats[index] + (double)stats[index + 1]) * (double)stats[index];
+    }
+
+   
 
 }
