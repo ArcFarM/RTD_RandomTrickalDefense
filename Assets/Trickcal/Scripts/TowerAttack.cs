@@ -12,8 +12,10 @@ public class TowerAttack : MonoBehaviour
  
     //적이 이동한 거리를 받아오기 위한 변수
     int unit_dist = 0;
-    //towerstats에서 적 공격 대기 시간을 받아온다
-    double atk_spd = 0;
+    public GameObject tower;
+    //싱글톤을 이용하여 적 정보를 가져온다
+    private List<GameObject> enemys;
+    
     
     void Start()
     {
