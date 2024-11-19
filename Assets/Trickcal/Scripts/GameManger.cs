@@ -21,6 +21,13 @@ public class GameManager : MonoBehaviour
             return instance;
         }
     }
+
+    //적 생성과 타겟팅, 제거를 담당할 전역 리스트
+    private List<GameObject> Enemys = new List<GameObject>();
+
+    public List<GameObject> Get_Enemy(){
+        return Enemys;
+    }
     void Awake()
     {
         if(instance == null)
