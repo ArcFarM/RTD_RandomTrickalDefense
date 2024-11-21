@@ -22,11 +22,46 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    //현재 자원
+    int life;
+    int leaf;
+    int mocaron;
+    int coupon;
+    //현재 스테이지
+    int wave;
+    //---------------------------적 스탯----------------------------
+    //id
+    int id;
+    //체력
+    double hp;
+    //클래스(일반/특수/보스)
+    enum Enemy_Class { Normal, Special, Boss };
+    //특수 적 한정) 사용할 스펠
+    enum Sp_Enemy_Spell { SpeedUp, HPRegen, DmgOne };
+    //이동 속도
+    float spd;
+    //방어력
+    int armor;
+
     //적 생성과 타겟팅, 제거를 담당할 전역 리스트
     private List<GameObject> Enemys = new List<GameObject>();
 
+    //적 생성
+    public void Create_Enemy(GameObject go)
+    {
+        //null check
+        if (go == null || go.tag != "Enemy") return;
+
+        //전역 리스트에 추가
+        Enemys.Add(go);
+        go.GetComponent<Enemy_Manager>();
+    }
     public List<GameObject> Get_Enemy(){
         return Enemys;
+    }
+    public void Set_Enemy(List<GameObject> l)
+    {
+        Enemys = l;
     }
     void Awake()
     {
