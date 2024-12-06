@@ -10,8 +10,6 @@ public class TowerAttack : MonoBehaviour
 
     // Start is called before the first frame update
  
-    //적이 이동한 거리를 받아오기 위한 변수
-    int unit_dist = 0;
     public GameObject tower;
     //싱글톤을 이용하여 적 정보를 가져온다
     private List<GameObject> enemys;

@@ -3,21 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-enum Enemy_Class { Normal, Special, Boss };
-enum Sp_Enemy_Spell { SpeedUp, HPRegen, DmgOne };
+public enum Enemy_Class { Normal, Special, Boss };
+public enum Sp_Enemy_Spell { SpeedUp, HPRegen, DmgOne };
 
 public class Enemy_Manager : MonoBehaviour
 {
     //스탯을 매기고 관리할 적
-    public GameObject enemy;
+    public GameObject result;
 
     //고유 번호, 체력, 클래스, 특수 적의 스펠, 이동 속도, 방어력
-    string id;
-    double hp;
-    Enemy_Class ec;
-    Sp_Enemy_Spell? es = null;
-    float spd;
-    int armor;
+    public string id;
+    public double hp;
+    public Enemy_Class ec;
+    public Sp_Enemy_Spell? es = null;
+    public float spd;
+    public int armor;
 
     //웨이브 수에 곱할 상수와 특수 적, 보스 용 계수
     public int n_hp = 10, n_armor = 2;
@@ -27,10 +27,8 @@ public class Enemy_Manager : MonoBehaviour
     //wav : 현재 웨이브 번호 flag : 특수 적 소환 여부
     public GameObject Enemy_Setting(int wav, bool flag)
     {
-        GameObject result = new GameObject();
         result.AddComponent<Enemy_Manager>();
         Enemy_Manager em = result.GetComponent<Enemy_Manager>();
-
 
         //보스 적 id
         if (wav % 5 == 0 && !flag)
@@ -52,6 +50,8 @@ public class Enemy_Manager : MonoBehaviour
             if (wav < 10) em.id = "S9999";
             s_hp = 30; s_armor = 2;
         }
+        //TODO : 해당 id를 갖는 스프라이트를 가져와서 할당하기
+
         //체력과 방어력은 클래스에 따라 정해진 값을 웨이브 수에 곱하고, 이동속도 고정
         em.hp = n_hp * wav * b_hp * s_hp;
         em.armor = n_armor * wav * b_armor * s_armor;

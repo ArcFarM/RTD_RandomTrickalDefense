@@ -26,23 +26,23 @@ public class GameManager : MonoBehaviour
     }
 
     //현재 자원
-    int life;
-    int leaf;
-    int mocaron;
-    int coupon;
+    public int life;
+    public int leaf;
+    public int mocaron;
+    public int coupon;
     //현재 스테이지
-    int wave;
+    public int wave;
 
 
     //적 생성과 타겟팅, 제거를 담당할 전역 리스트
     private List<GameObject> Enemys = new List<GameObject>();
 
+    //적 소환을 위한 버튼과 스폰 타이머
     public void Spawn_Enemy_Button(){
         coroutine = CountDownStart(10);
         StartCoroutine(coroutine);
         return;
     }
-
 
     IEnumerator CountDownStart(int CountDown)
     {
@@ -75,6 +75,10 @@ public class GameManager : MonoBehaviour
     {
         Enemys = l;
     }
+
+
+
+    //싱글톤 설정
     void Awake()
     {
         if(instance == null)
