@@ -8,22 +8,23 @@ public class Enemy_Move : MonoBehaviour
     public GameObject? next = null;
 
     //적과 웨이포인트가 만났을 때
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (next != null && collision.gameObject.tag == "Enemy")
+        if (next != null && other.gameObject.tag == "Enemy")
         {
-            Transform target = collision.gameObject.transform;
+            Debug.Log("Collision Detected");
+            Transform target = other.gameObject.transform;
             //적을 다음 웨이포인트가 위치한 지역으로 옮긴다
             target.position = Vector3.MoveTowards(target.position,
                                                   next.gameObject.transform.position,
-                                                  target.GetComponent<Enemy_Manager>().spd);
+                                                  1.5f/*target.GetComponent<Enemy_Manager>().spd*/);
         }
         else if(next == null)
         {
             //싱글톤 인스턴스 받아오기
             GameManager gm = GameManager.Instance;
             //TODO : 오브젝트 삭제 처리 하고 라이프 -1 진행
-            collision.gameObject.SetActive(false);
+            other.gameObject.SetActive(false);
             gm.life--;
         }
     }

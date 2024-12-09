@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public int wave;
 
 
+    //생성할 적(샘플에 정보 추가 및 스프라이트 설정)
+    public GameObject object_base;
     //적 생성과 타겟팅, 제거를 담당할 전역 리스트
     private List<GameObject> Enemys = new List<GameObject>();
 
@@ -62,7 +64,7 @@ public class GameManager : MonoBehaviour
 
         //특수 적 소환 버튼 누르기 감지
         //if(특수 적 소환 버튼 눌렸다면) go = em.Enemy_Setting(wave, true); else
-        go = em.Enemy_Setting(wave, false);
+        go = em.Enemy_Setting(wave, false, object_base);
 
         //전역 리스트에 추가
         Enemys.Add(go);

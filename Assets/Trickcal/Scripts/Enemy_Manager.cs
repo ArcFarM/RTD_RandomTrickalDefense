@@ -8,8 +8,6 @@ public enum Sp_Enemy_Spell { SpeedUp, HPRegen, DmgOne };
 
 public class Enemy_Manager : MonoBehaviour
 {
-    //스탯을 매기고 관리할 적
-    public GameObject result;
 
     //고유 번호, 체력, 클래스, 특수 적의 스펠, 이동 속도, 방어력
     public string id;
@@ -25,7 +23,7 @@ public class Enemy_Manager : MonoBehaviour
     public int b_hp = 1, b_armor = 1;
 
     //wav : 현재 웨이브 번호 flag : 특수 적 소환 여부
-    public GameObject Enemy_Setting(int wav, bool flag)
+    public GameObject Enemy_Setting(int wav, bool flag, GameObject result)
     {
         result.AddComponent<Enemy_Manager>();
         Enemy_Manager em = result.GetComponent<Enemy_Manager>();
