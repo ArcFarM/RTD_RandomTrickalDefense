@@ -23,9 +23,7 @@ public class Enemy_Move : MonoBehaviour
         {
             //싱글톤 인스턴스 받아오기
             GameManager gm = GameManager.Instance;
-            //TODO : 오브젝트 삭제 처리 하고 라이프 -1 진행
-            other.gameObject.SetActive(false);
-            gm.life--;
+            //TODO : 오브젝트 통과 이벤트
         }
     }
 }

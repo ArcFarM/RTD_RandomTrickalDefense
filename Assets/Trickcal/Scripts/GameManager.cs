@@ -58,17 +58,7 @@ public class GameManager : MonoBehaviour
     //적 생성
     public void Create_Enemy()
     {
-        //Enemy_Manager를 통해 세팅
-        GameObject go = new GameObject();
-        Enemy_Manager em = go.AddComponent<Enemy_Manager>();
 
-        //특수 적 소환 버튼 누르기 감지
-        //if(특수 적 소환 버튼 눌렸다면) go = em.Enemy_Setting(wave, true); else
-        go = em.Enemy_Setting(wave, false, object_base);
-
-        //전역 리스트에 추가
-        Enemys.Add(go);
-        go.GetComponent<Enemy_Manager>();
     }
     public List<GameObject> Get_Enemy(){
         return Enemys;
