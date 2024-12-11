@@ -18,9 +18,13 @@ public class Enemy_Manager : MonoBehaviour
     //생성해서 내보낼 게임 오브젝트
     //최초 inspector에서 할당해놓으면 여기에 살을 덧붙여서 내보낸다
     public GameObject prefab;
-
-    //싱글톤 인스턴스
-    GameManager gm = GameManager.Instance;
+    //싱글톤
+    GameManager gm;
+    private void Start()
+    {
+        //싱글톤 인스턴스 초기화
+        gm = GameManager.Instance;
+    }
 
     //wav : 현재 웨이브 번호 flag : 특수 적 소환 여부
     public void Enemy_Setting(int wav, bool flag)
@@ -78,6 +82,8 @@ public class Enemy_Manager : MonoBehaviour
         }
 
         //생성된 GameObject result를 전역 리스트에 배치한다
-        //TODO
+        List<GameObject> list = gm.Get_Enemy();
+        list.Add(result);
+        gm.Set_Enemy(list);
     }
 }

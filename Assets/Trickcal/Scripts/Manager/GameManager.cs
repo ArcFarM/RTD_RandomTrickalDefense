@@ -25,41 +25,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //현재 자원
+    //현재 자원 -> 별도 더미오브젝트가 수행할 예정(삭제)
     public int life;
     public int leaf;
     public int mocaron;
     public int coupon;
-    //현재 스테이지
+    //현재 스테이지 넘버
     public int wave;
 
-
-    //생성할 적(샘플에 정보 추가 및 스프라이트 설정)
-    public GameObject object_base;
-    //적 생성과 타겟팅, 제거를 담당할 전역 리스트
+    //적을 관리할 리스트 : 현재 생존해 있는 적들과 그 정보를 저장
     private List<GameObject> Enemys = new List<GameObject>();
-
-    //적 소환을 위한 버튼과 스폰 타이머
-    public void Spawn_Enemy_Button(){
-        coroutine = CountDownStart(10);
-        StartCoroutine(coroutine);
-        return;
-    }
-
-    IEnumerator CountDownStart(int CountDown)
-    {
-        while (CountDown > 0)
-        {//카운트다운이 0이 될때까지
-            CountDown--;//카운트다운 감소
-            Create_Enemy();
-            yield return new WaitForSeconds(1.0f);//1초대기
-        }
-    }
-    //적 생성
-    public void Create_Enemy()
-    {
-
-    }
+    
     public List<GameObject> Get_Enemy(){
         return Enemys;
     }
@@ -85,7 +61,6 @@ public class GameManager : MonoBehaviour
     }
 
     void Start(){
-        Enemy_Spawn_button.onClick.AddListener(Spawn_Enemy_Button);
     }
     // Update is called once per frame
     void Update()

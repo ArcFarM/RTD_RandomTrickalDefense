@@ -5,7 +5,10 @@ using static EnumDict;
 
 public class Enemy_Stat : MonoBehaviour
 {
+    //능력치를 저장할 리스트
     List<object> stats = new List<object>();
+    //사용 여부 미정 - 이 몬스터가 생성될 당시 몇 번째에 위치하였는가
+    int index = -1;
 
     public Enemy_Stat()
     {
