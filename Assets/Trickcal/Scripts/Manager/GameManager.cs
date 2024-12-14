@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    public Button Enemy_Spawn_button;
-    private IEnumerator coroutine;
+    
     // Start is called before the first frame update
     private static GameManager instance;
 
@@ -43,9 +42,7 @@ public class GameManager : MonoBehaviour
     {
         Enemys = l;
     }
-    void Spawn_Enemy(){
-        this.GetComponent<Enemy_Manager>().Enemy_Setting(1, false);
-    }
+
 
 
 
@@ -64,7 +61,6 @@ public class GameManager : MonoBehaviour
     }
 
     void Start(){
-        Enemy_Spawn_button.onClick.AddListener(Spawn_Enemy);
     }
     // Update is called once per frame
     void Update()
