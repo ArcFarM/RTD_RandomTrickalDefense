@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class GameManager : MonoBehaviour
     public int coupon;
     //현재 스테이지 넘버
     public int wave;
+    public TMP_Text Life_Count;
 
     //적을 관리할 리스트 : 현재 생존해 있는 적들과 그 정보를 저장
     private List<GameObject> Enemys = new List<GameObject>();
@@ -44,7 +46,10 @@ public class GameManager : MonoBehaviour
     }
 
 
-
+    public void Life_Decrease(int damage){
+        life -= damage;
+        Life_Count.text = life.ToString();
+    }
 
     //싱글톤 설정
     void Awake()
