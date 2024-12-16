@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     }
 
     void Start(){
+        Life_Count.text = life.ToString();
     }
     // Update is called once per frame
     void Update()
