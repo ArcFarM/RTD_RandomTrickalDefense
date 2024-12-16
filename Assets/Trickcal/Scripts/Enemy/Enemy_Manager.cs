@@ -37,9 +37,7 @@ public class Enemy_Manager : MonoBehaviour
 
     IEnumerator Delayed_Spawn_Enemy()
     {
-        yield return new WaitForSeconds(0.1f);
-        Enemy_Setting(0, false);
-        for(int i = 1; i <= 20; i++)
+        for(int i = 1; i <= 1; i++)
         {
             yield return new WaitForSeconds(0.1f);
             Enemy_Setting(i, false);
@@ -89,6 +87,7 @@ public class Enemy_Manager : MonoBehaviour
             es.Set_List(Stats.id, id);
             es.Set_List(Stats.type, Enemy_Type.special);
         }
+        es.Set_List(Stats.speed, 5.0f);
         //TODO : 해당 id를 갖는 스프라이트를 가져와서 할당하기
 
         //체력과 방어력은 클래스에 따라 정해진 값을 웨이브 수에 곱하고, 이동속도 고정
@@ -115,7 +114,7 @@ public class Enemy_Manager : MonoBehaviour
         gm.Set_Enemy(list);
 
         //디버그
-        Debug.Log("wav : " + wav + " id : " + id + " type : " + es.Get_List(Stats.type)
-            + " hp : " + es.Get_List(Stats.hp) + " armor : " + es.Get_List(Stats.armor));
+        //Debug.Log("wav : " + wav + " id : " + id + " type : " + es.Get_List(Stats.type)
+        //    + " hp : " + es.Get_List(Stats.hp) + " armor : " + es.Get_List(Stats.armor));
     }
 }
