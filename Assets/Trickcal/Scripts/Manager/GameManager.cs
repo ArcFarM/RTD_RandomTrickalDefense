@@ -45,6 +45,12 @@ public class GameManager : MonoBehaviour
         Enemys = l;
     }
 
+    //TODO : 타워 관리 리스트
+    private List<GameObject> Towers = new List<GameObject>();
+    
+    public List <GameObject> Get_Towers(){ return Towers; }
+    public void Set_Towers(List<GameObject> l) { Towers = l; }
+
 
     public void Life_Decrease(int damage){
         life -= damage;

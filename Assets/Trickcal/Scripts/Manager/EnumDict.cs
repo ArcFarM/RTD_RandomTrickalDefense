@@ -30,8 +30,15 @@ public static class EnumDict
     public enum T_stats
     {
         //타워 id와 타워 등급
-        //공격력, 공격 속도, 사정 거리
-        //스킬 쿨타임, 스킬 계수, 치명타 확률
+        id, grade,
+        //순서대로 공격력, 공격속도, 사거리, 쿨타임, 스킬 계수
+        //순서대로 현재 기본수치, +증가량, %증가량(배수), 최종 수치
+        dmg, dmg_plus, dmg_pcnt, dmg_total,
+        spd, spd_plus, spd_pcnt, spd_total,
+        rng, rng_plus, rng_pcnt, rng_total,
+        cd, cd_plus, cd_pcnt, cd_total,
+        skl, skl_plus, skl_pcnt, skl_total,
+        crit, crit_plus, crit_pcnt, crit_total
     }
     //플레이어가 보유 가능한 스펠 목록
     public enum P_spell
@@ -39,6 +46,8 @@ public static class EnumDict
         //공속 증가, 평타 공격력 증가, 스킬 공격력 증가
         atkspdup, atkup, skillup,
         //모든 타워 무작위 진화, 적 방어력 감소
-        levelup, armorpenet
+        allup, armorpenet,
+        //무작위 돈 증가, 단일 타워 무작위 진화, 무작위 업그레이드
+        rndmoney, rndup, rndupgrade
     }
 }
