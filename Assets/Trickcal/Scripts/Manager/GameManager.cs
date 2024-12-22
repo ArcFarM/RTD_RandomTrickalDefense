@@ -45,11 +45,49 @@ public class GameManager : MonoBehaviour
         Enemys = l;
     }
 
-    //TODO : 타워 관리 리스트
-    private List<GameObject> Towers = new List<GameObject>();
+    //TODO : 타일 리스트 <<< 현재 게임 내에 설치된 타워 리스트
+    private List<GameObject> tiles = new List<GameObject>();
+    //현재 게임 내에 존재하는 타워의 종류와 갯수를 저장할 딕셔너리
+    Dictionary<string, int> tower_count = new Dictionary<string, int>();
+    public List <GameObject> Get_Tiles(){ return tiles; }
+    public void Set_Tiles(List<GameObject> l) { tiles = l; }
+
+    public int Get_Tower_Count(string id) {
+        if (tower_count.ContainsKey(id)) { return tower_count[id]; }
+        else {
+            Debug.LogError("Wrong Id has been sent.");
+            return -1;
+        }
+    }
+
+    public void Set_Tower_Count(string id) {
+        if (tower_count.ContainsKey(id)) { tower_count[id]++; }
+        else {
+            Debug.LogError("Wrong Id has been sent.");
+        }
+    }
+
+    //타워 목록 리스트 <<< 타워 설치, 합성에 쓰일 리스트
+    List<List<GameObject>> All_Towers = new List<List<GameObject>>();
+
+    List<GameObject> Lv1_Towers = new List<GameObject>();
+    List<GameObject> Lv2_Towers = new List<GameObject>();
+    List<GameObject> Lv3_Towers = new List<GameObject>();
+    List<GameObject> Lv4_Towers = new List<GameObject>();
+    List<GameObject> Lv5_Towers = new List<GameObject>();
+
+    //이 메서드를 사용해서 레벨대에 맞는 랜덤 타워 얻기
+    public GameObject Get_RandomTower(int lvl) {
+        int rnd = Random.Range(0, All_Towers[lvl].Count);
+        return All_Towers[lvl][rnd];
+    }
+
+    //선택 타워 건설에 사용
+    public GameObject Get_SelectTower(int lvl, int idx) {
+        return All_Towers[lvl][idx];
+    }
+
     
-    public List <GameObject> Get_Towers(){ return Towers; }
-    public void Set_Towers(List<GameObject> l) { Towers = l; }
 
 
     public void Life_Decrease(int damage){
@@ -73,6 +111,13 @@ public class GameManager : MonoBehaviour
 
     void Start(){
         Life_Count.text = life.ToString();
+        //딕셔너리 초기화
+        for(int i = 0; i < All_Towers.Count; i++) {
+            for(int j = 0; j <  All_Towers[i].Count; j++) {
+                string tower_id = All_Towers[i][j].GetComponent<TowerStats>().Get_Stat(EnumDict.T_stats.id).ToString();
+                tower_count.TryAdd(tower_id, 0);
+            }
+        }
     }
     // Update is called once per frame
     void Update()

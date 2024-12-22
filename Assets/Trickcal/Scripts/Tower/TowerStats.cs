@@ -17,13 +17,13 @@ public class TowerStats : MonoBehaviour
         }   
     }
 
-    object Get_Stat(T_stats idx)
+    public object Get_Stat(T_stats idx)
     {
         return stats[(int)idx];
     }
 
     //스탯 수정
-    void Set_Stat(T_stats idx, object val)
+    public void Set_Stat(T_stats idx, object val)
     {
         stats[(int)idx] = val;
     }
