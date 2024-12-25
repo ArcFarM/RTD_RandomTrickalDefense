@@ -24,14 +24,31 @@ public class TowerManager : MonoBehaviour {
 
     public GameObject go;
     GroundManager go_gm;
+    GameManager gm;
 
     private void Start() {
         go_gm = go.GetComponent<GroundManager>();
+        gm = GameManager.Instance;
     }
 
+    bool flag_build = false, flag_up = false, flag_sell = false;
+
     private void Update() {
-        if (Input.GetKey(KeyCode.Q)) {
+        if (Input.GetKeyDown(KeyCode.Q)) {
+            //타워 건설 모드로 전환
+            flag_build = true;
 
         }
+        if (Input.GetKeyDown(KeyCode.W)) {
+            //타워 합성 모드로 전환
+        }
+        if (Input.GetKeyDown(KeyCode.E)) {
+            //타워 판매 모드로 전환
+            
+        }
+    }
+
+    private void OnMouseDown() {
+        
     }
 }

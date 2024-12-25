@@ -14,14 +14,16 @@ public class Tower_Tile : MonoBehaviour
     //이 타일에 설치될 타워
     GameObject tower;
 
+    //타워 업그레이드 가능 표시 화살표
+    public GameObject up_arrow;
+
     private void Start() {
         renderer = GetComponent<Renderer>();
-
-        //Switch_Material();
+        if(up_arrow != null ) up_arrow.SetActive(false);
     }
 
     private void Update() {
-        Glow_Tile();
+      
     }
 
     //타워가 설치되어 있다면 true를 반환
@@ -36,7 +38,7 @@ public class Tower_Tile : MonoBehaviour
         return copy;
     }
 
-    //설치된 타워를 수정
+    //설치된 타워를 수정, nullable 이유 = 타워 판매 가능
     public void Set_Tower(GameObject? t) { tower = t; }
 
     //특정 조건에서 빛나서 상호작용 가능한 상태임을 알림
@@ -78,5 +80,30 @@ public class Tower_Tile : MonoBehaviour
         }
 
         yield break;
+    }
+
+    //업그레이드 가능 화살표 표시 및 지우기
+    public void Show_UpArrow() {
+        Vector3 new_pos = transform.position;
+        new_pos.y = transform.position.y + 2;
+        up_arrow.transform.position = new_pos;
+        
+        up_arrow.SetActive(true);
+    }
+
+    public void Hide_UpArrow() {
+        up_arrow.SetActive(false);
+    }
+
+    IEnumerator Arrow_Test() {
+        for(int i = 0; i < 10; i++) {
+            Debug.Log("Arrow show");
+            Show_UpArrow();
+            yield return new WaitForSeconds(1.0f);
+            Debug.Log("Arrow Hide");
+            Hide_UpArrow();
+            yield return new WaitForSeconds(2.0f);
+        }
+
     }
 }

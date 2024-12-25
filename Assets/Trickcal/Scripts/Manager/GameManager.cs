@@ -40,8 +40,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Get_Enemy(){
         return Enemys;
     }
-    public void Set_Enemy(List<GameObject> l)
-    {
+    public void Set_Enemy(List<GameObject> l){
         Enemys = l;
     }
 
@@ -68,13 +67,13 @@ public class GameManager : MonoBehaviour
     }
 
     //타워 목록 리스트 <<< 타워 설치, 합성에 쓰일 리스트
-    List<List<GameObject>> All_Towers = new List<List<GameObject>>();
+    public List<List<GameObject>> All_Towers = new List<List<GameObject>>();
 
-    List<GameObject> Lv1_Towers = new List<GameObject>();
-    List<GameObject> Lv2_Towers = new List<GameObject>();
-    List<GameObject> Lv3_Towers = new List<GameObject>();
-    List<GameObject> Lv4_Towers = new List<GameObject>();
-    List<GameObject> Lv5_Towers = new List<GameObject>();
+    public List<GameObject> Lv1_Towers = new List<GameObject>();
+    public List<GameObject> Lv2_Towers = new List<GameObject>();
+    public List<GameObject> Lv3_Towers = new List<GameObject>();
+    public List<GameObject> Lv4_Towers = new List<GameObject>();
+    public List<GameObject> Lv5_Towers = new List<GameObject>();
 
     //이 메서드를 사용해서 레벨대에 맞는 랜덤 타워 얻기
     public GameObject Get_RandomTower(int lvl) {
