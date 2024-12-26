@@ -7,11 +7,21 @@ public class GroundManager : MonoBehaviour
     //설치 가능 지역들을 담을 리스트 
     public List<GameObject> tiles = new List<GameObject>();
 
+    //전체 행과 열의 수
+    int row = 6;
+    int col = 6;
+
+    public int get_row() { return row; }
+    public int get_col() { return col; }
     /*
      * 구현할 기능 : 키보드 입력에 반응하여 변하는 기능 넣기
      */
-    private void Update() {
-        if (Input.GetKey(KeyCode.W)) React_up();
+    private void Start() {
+        for(int i = 0; i < row; i++) {
+            for(int j = 0; j < col; j++) {
+                tiles[i].GetComponent<Tower_Tile>().set_rc(i, j);
+            }
+        }
     }
 
     //합성 가능한 타워 표시

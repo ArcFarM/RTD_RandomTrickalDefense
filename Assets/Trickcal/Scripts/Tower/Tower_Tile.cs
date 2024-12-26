@@ -17,6 +17,13 @@ public class Tower_Tile : MonoBehaviour
     //타워 업그레이드 가능 표시 화살표
     public GameObject up_arrow;
 
+    //위치 편하게 찾기
+    int row = 0, col = 0;
+
+    public int get_row() { return row; }
+    public int get_col() { return col; }
+    public void set_rc (int r, int c) { row = r; col = c; }
+
     private void Start() {
         renderer = GetComponent<Renderer>();
         if(up_arrow != null ) up_arrow.SetActive(false);

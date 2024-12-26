@@ -37,6 +37,7 @@ public class TowerManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Q)) {
             //타워 건설 모드로 전환
             flag_build = true;
+            //우클릭으로 해제
 
         }
         if (Input.GetKeyDown(KeyCode.W)) {
@@ -48,7 +49,31 @@ public class TowerManager : MonoBehaviour {
         }
     }
 
-    private void OnMouseDown() {
-        
+    void Click() {
+        //오브젝트와 충돌하여 클릭 감지
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
+        //클릭이 감지된 오브젝트
+        RaycastHit hit;
+
+        //클릭이 감지되어 hit이 할당되었다면 우선 타워 설치 가능 지역인 지 확인
+        if(Physics.Raycast(ray, out hit)) {
+            if (hit.collider.gameObject.tag == "Tower_Deploy") {
+                Tower_Tile hit_tt = hit.collider.gameObject.GetComponent<Tower_Tile>();
+                //클릭된 타일의 좌표
+                int row = hit_tt.get_row();
+                int col = hit_tt.get_col();
+                int idx = row * go_gm.get_row() + col;
+
+                //해당 지역의 타일에 타워가 없다면 설치
+                if (hit_tt.Tower_Check() == false && flag_build) {
+                    flag_build = false;
+                    //TODO : 싱글톤의 타워 리스트에서 랜덤 타워 꺼내서 해당 towertile의 go에 할당
+                }
+                //타워 합성
+                //if (hit_tt.Tower_Check() && )
+                //타워 판매
+            }
+            else return;
+        }
     }
 }
