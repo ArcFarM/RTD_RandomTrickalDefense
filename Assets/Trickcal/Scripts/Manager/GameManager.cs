@@ -111,10 +111,16 @@ public class GameManager : MonoBehaviour
     void Start(){
         Life_Count.text = life.ToString();
         //딕셔너리 초기화
-        for(int i = 0; i < All_Towers.Count; i++) {
+        All_Towers.Add(Lv1_Towers);
+        All_Towers.Add(Lv2_Towers);
+        All_Towers.Add(Lv3_Towers);
+        All_Towers.Add(Lv4_Towers);
+        All_Towers.Add(Lv5_Towers);
+
+        for (int i = 0; i < All_Towers.Count; i++) {
             for(int j = 0; j <  All_Towers[i].Count; j++) {
-                string tower_id = All_Towers[i][j].GetComponent<TowerStats>().Get_Stat(EnumDict.T_stats.id).ToString();
-                tower_count.TryAdd(tower_id, 0);
+                //string tower_id = All_Towers[i][j].GetComponent<TowerStats>().Get_Stat(EnumDict.T_stats.id).ToString();
+                //tower_count.TryAdd(tower_id, 0);
             }
         }
     }

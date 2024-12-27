@@ -36,9 +36,9 @@ public class TowerManager : MonoBehaviour {
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Q)) {
             //타워 건설 모드로 전환
+            Debug.Log("Q Pressed");
             flag_build = true;
             //우클릭으로 해제
-
         }
         if (Input.GetKeyDown(KeyCode.W)) {
             //타워 합성 모드로 전환
@@ -47,27 +47,44 @@ public class TowerManager : MonoBehaviour {
             //타워 판매 모드로 전환
             
         }
+
+        if(flag_build || flag_up || flag_sell) {
+            if (Input.GetMouseButtonDown(0)) {
+                Debug.Log("Click Method run");
+                Click();
+            } else if(Input.GetMouseButtonDown(1)) {
+                Debug.Log("Button Press Cancled.");
+                flag_build = flag_up = flag_sell = false;
+            }
+        }
     }
 
     void Click() {
+
         //오브젝트와 충돌하여 클릭 감지
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         //클릭이 감지된 오브젝트
-        RaycastHit hit;
+        RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
         //클릭이 감지되어 hit이 할당되었다면 우선 타워 설치 가능 지역인 지 확인
-        if(Physics.Raycast(ray, out hit)) {
+        if (hit.collider != null) {
+
+            Debug.Log("collision detected");
             if (hit.collider.gameObject.tag == "Tower_Deploy") {
+                Debug.Log("Tower Build Started");
                 Tower_Tile hit_tt = hit.collider.gameObject.GetComponent<Tower_Tile>();
                 //클릭된 타일의 좌표
-                int row = hit_tt.get_row();
-                int col = hit_tt.get_col();
-                int idx = row * go_gm.get_row() + col;
+                //int row = hit_tt.get_row();
+                //int col = hit_tt.get_col();
+                //int idx = row * go_gm.get_row() + col;
 
                 //해당 지역의 타일에 타워가 없다면 설치
                 if (hit_tt.Tower_Check() == false && flag_build) {
                     flag_build = false;
                     //TODO : 싱글톤의 타워 리스트에서 랜덤 타워 꺼내서 해당 towertile의 go에 할당
+                    GameObject rnd_tower = gm.Get_RandomTower(0);
+
+                    hit_tt.Set_Tower(rnd_tower);
                 }
                 //타워 합성
                 //if (hit_tt.Tower_Check() && )

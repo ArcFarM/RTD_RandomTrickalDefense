@@ -12,7 +12,7 @@ public class Tower_Tile : MonoBehaviour
     Renderer renderer;
 
     //이 타일에 설치될 타워
-    GameObject tower;
+    public GameObject tower = null;
 
     //타워 업그레이드 가능 표시 화살표
     public GameObject up_arrow;
@@ -46,7 +46,16 @@ public class Tower_Tile : MonoBehaviour
     }
 
     //설치된 타워를 수정, nullable 이유 = 타워 판매 가능
-    public void Set_Tower(GameObject? t) { tower = t; }
+    public void Set_Tower(GameObject? t) { 
+        tower = t;
+        if(tower != null ) {
+            Instantiate(tower);
+            tower.SetActive(true);
+            while(Vector2.Distance(tower.gameObject.transform.position, transform.position) > 0.5f) {
+                tower.gameObject.transform.position = transform.position;
+            }
+        }
+    }
 
     //특정 조건에서 빛나서 상호작용 가능한 상태임을 알림
 

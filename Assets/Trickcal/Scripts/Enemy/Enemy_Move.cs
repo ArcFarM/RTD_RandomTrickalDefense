@@ -12,7 +12,7 @@ public class Enemy_Move : MonoBehaviour
     {
         yield return new WaitForSeconds(1.0f);
         //디버깅 용
-        Debug.Log("Coroutine Started");
+        //Debug.Log("Coroutine Started");
         //코드 축약을 위한 선언
         float spd = (float)move_this.GetComponent<Enemy_Stat>().Get_List(Stats.speed);
 

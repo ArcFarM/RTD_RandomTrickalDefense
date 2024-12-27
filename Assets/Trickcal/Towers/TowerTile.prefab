@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 284635637814587319}
   - component: {fileID: 4829355883473832805}
   - component: {fileID: 5970470293195007394}
-  - component: {fileID: 3353287437035556415}
+  - component: {fileID: -1003800624837921602}
   m_Layer: 0
   m_Name: TowerTile
   m_TagString: Untagged
@@ -112,7 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   up_arrow: {fileID: 0}
---- !u!61 &3353287437035556415
+--- !u!61 &-1003800624837921602
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
