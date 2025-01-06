@@ -49,11 +49,8 @@ public class Tower_Tile : MonoBehaviour
     public void Set_Tower(GameObject? t) { 
         tower = t;
         if(tower != null ) {
-            Instantiate(tower);
             tower.SetActive(true);
-            while(Vector2.Distance(tower.gameObject.transform.position, transform.position) > 0.5f) {
-                tower.gameObject.transform.position = transform.position;
-            }
+            tower.gameObject.transform.position = new Vector2(transform.position.x, transform.position.y+0.5f);
         }
     }
 

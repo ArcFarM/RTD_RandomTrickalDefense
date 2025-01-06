@@ -25,7 +25,6 @@ public class TowerManager : MonoBehaviour {
     public GameObject go;
     GroundManager go_gm;
     GameManager gm;
-
     private void Start() {
         go_gm = go.GetComponent<GroundManager>();
         gm = GameManager.Instance;
@@ -54,36 +53,35 @@ public class TowerManager : MonoBehaviour {
                 Click();
             } else if(Input.GetMouseButtonDown(1)) {
                 Debug.Log("Button Press Cancled.");
-                flag_build = flag_up = flag_sell = false;
+                Flag_Off();
             }
         }
     }
 
     void Click() {
 
-        //오브젝트와 충돌하여 클릭 감지
+        //클릭한 순간의 좌표
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
         //클릭이 감지된 오브젝트
         RaycastHit2D hit = Physics2D.Raycast(mousePosition, Vector2.zero);
+
+        Debug.Log(hit.transform.position);
 
         //클릭이 감지되어 hit이 할당되었다면 우선 타워 설치 가능 지역인 지 확인
         if (hit.collider != null) {
 
             Debug.Log("collision detected");
             if (hit.collider.gameObject.tag == "Tower_Deploy") {
-                Debug.Log("Tower Build Started");
+                Debug.Log("Tower Build Started at" + hit.collider.gameObject.transform.position);
                 Tower_Tile hit_tt = hit.collider.gameObject.GetComponent<Tower_Tile>();
-                //클릭된 타일의 좌표
-                //int row = hit_tt.get_row();
-                //int col = hit_tt.get_col();
-                //int idx = row * go_gm.get_row() + col;
 
                 //해당 지역의 타일에 타워가 없다면 설치
                 if (hit_tt.Tower_Check() == false && flag_build) {
-                    flag_build = false;
+                    Flag_Off();
                     //TODO : 싱글톤의 타워 리스트에서 랜덤 타워 꺼내서 해당 towertile의 go에 할당
                     GameObject rnd_tower = gm.Get_RandomTower(0);
-
+                    rnd_tower = Instantiate(rnd_tower);
                     hit_tt.Set_Tower(rnd_tower);
                 }
                 //타워 합성
@@ -92,5 +90,9 @@ public class TowerManager : MonoBehaviour {
             }
             else return;
         }
+    }
+
+    void Flag_Off() {
+        flag_build = flag_up = flag_sell = false;
     }
 }
