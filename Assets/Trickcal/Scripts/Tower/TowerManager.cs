@@ -35,27 +35,37 @@ public class TowerManager : MonoBehaviour {
     private void Update() {
         if (Input.GetKeyDown(KeyCode.Q)) {
             //타워 건설 모드로 전환
-            Debug.Log("Q Pressed");
-            flag_build = true;
+            //Debug.Log("Q Pressed");
+            if (!flag_up && !flag_sell) flag_build = true;
             //우클릭으로 해제
         }
         if (Input.GetKeyDown(KeyCode.W)) {
             //타워 합성 모드로 전환
+            if (!flag_build && !flag_sell) {
+                flag_up = true;
+                go_gm.React_up();
+            }
         }
         if (Input.GetKeyDown(KeyCode.E)) {
             //타워 판매 모드로 전환
-            
+            if (!flag_build && !flag_up) flag_sell = true;
         }
 
-        if(flag_build || flag_up || flag_sell) {
+        if (flag_build || flag_up || flag_sell) {
             if (Input.GetMouseButtonDown(0)) {
                 Debug.Log("Click Method run");
                 Click();
-            } else if(Input.GetMouseButtonDown(1)) {
+            }
+            else if (Input.GetMouseButtonDown(1)) {
                 Debug.Log("Button Press Cancled.");
+                go_gm.React_end();
                 Flag_Off();
             }
         }
+    }
+
+    void Flag_Off() {
+        flag_build = flag_up = flag_sell = false;
     }
 
     void Click() {
@@ -73,26 +83,68 @@ public class TowerManager : MonoBehaviour {
 
             Debug.Log("collision detected");
             if (hit.collider.gameObject.tag == "Tower_Deploy") {
-                Debug.Log("Tower Build Started at" + hit.collider.gameObject.transform.position);
+                //Debug.Log("Tower Build Started at" + hit.collider.gameObject.transform.position);
                 Tower_Tile hit_tt = hit.collider.gameObject.GetComponent<Tower_Tile>();
+                //타워 합성 및 판매에 사용될 타워 id를 미리 깡통만 선언
+                string tower_id = "";
 
                 //해당 지역의 타일에 타워가 없다면 설치
                 if (hit_tt.Tower_Check() == false && flag_build) {
                     Flag_Off();
-                    //TODO : 싱글톤의 타워 리스트에서 랜덤 타워 꺼내서 해당 towertile의 go에 할당
+                    //TODO : 타워 설치 분량 만큼의 자원 감소
                     GameObject rnd_tower = gm.Get_RandomTower(0);
                     rnd_tower = Instantiate(rnd_tower);
                     hit_tt.Set_Tower(rnd_tower);
+
+                    tower_id = rnd_tower.GetComponent<TowerStats>().id;
+                    gm.Set_dict(tower_id, gm.Get_dict(tower_id) + 1);
                 }
                 //타워 합성
-                //if (hit_tt.Tower_Check() && )
-                //타워 판매
+                if (hit_tt.Tower_Check() && flag_up) {
+                    //클릭한 타워가 합성 가능한 지 확인
+                    Flag_Off();
+
+                    //더 높은 단계의 타워로 합성
+                    tower_id = hit_tt.Get_Tower().GetComponent<TowerStats>().id;
+                    int level = hit_tt.Get_Tower().GetComponent<TowerStats>().level;
+                    // 동일 id와 같은 레벨의 타워가 2개 이상 존재하는지 확인
+                    if (gm.Get_dict(tower_id) >= 2) {
+                        int towersDeleted = 0;
+                        // 설치된 타워들 중 같은 id와 레벨의 타워 2개 삭제
+                        for (int i = 0; i < go_gm.tiles.Count; i++) {
+                            Tower_Tile tt = go_gm.tiles[i].GetComponent<Tower_Tile>();
+                            if (tt.Get_Tower() != null
+                                && tt.Get_Tower().GetComponent<TowerStats>().id == tower_id
+                                && tt.Get_Tower().GetComponent<TowerStats>().level == level) {
+                                Destroy(tt.Get_Tower());
+                                gm.Set_dict(tower_id, gm.Get_dict(tower_id) - 1);
+                                tt.Set_Tower(null);
+                                towersDeleted++;
+                            }
+                            if (towersDeleted >= 2) { break; }
+                        }
+                        // 새로운 타워 생성 및 배치
+                        GameObject newTower = gm.Get_RandomTower(level + 1);
+                        newTower = Instantiate(newTower);
+                        hit_tt.Set_Tower(newTower);
+                        string nt_id = newTower.GetComponent<TowerStats>().id;
+                        gm.Set_dict(nt_id, gm.Get_dict(nt_id) + 1);
+
+                        go_gm.React_end();
+                    }
+                    //타워 판매
+                    if(hit_tt.Tower_Check() && flag_sell) {
+                        Flag_Off();
+                        tower_id = hit_tt.Get_Tower().GetComponent<TowerStats>().id;
+                        Destroy(hit_tt.Get_Tower());
+                        gm.Set_dict(tower_id, gm.Get_dict(tower_id) - 1);
+                        //TODO : 재화 환급
+                        
+                        }
+                }
+                else return;
             }
-            else return;
         }
     }
-
-    void Flag_Off() {
-        flag_build = flag_up = flag_sell = false;
-    }
 }
+

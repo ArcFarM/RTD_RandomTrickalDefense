@@ -4,30 +4,29 @@ using static EnumDict;
 
 public class TowerStats : MonoBehaviour
 {
-    public List<object> stats = new List<object>();
+    //자료형이 다르므로 public으로 하는 것이 관리가 더 편하다
+    public string id;
+    public int level;
 
-    TowerStats()
-    {
-        //타워 스탯 초기화
-        stats.Add("");
-        stats.Add(0);
-        for(int i = 2; i < sizeof(T_stats); i++)
-        {
-            stats.Add(0.0f);
-        }   
+    //공격력
+    public int dmg;
+    //공격속도 (초당 횟수)
+    public double atk_spd;
+    //사거리
+    public float range;
+    //스킬 쿨타임
+    public double skill_cd;
+    //스킬 계수
+    public double skill_dmg;
+
+    
+    public double Stat_Calc(int val, int flat, double perc) {
+        return val + flat * perc;
     }
-
-    public object Get_Stat(T_stats idx)
-    {
-        return stats[(int)idx];
+    public double Stat_Calc(float val, float flat, double perc) {
+        return val + flat * perc;
     }
-
-    //스탯 수정
-    public void Set_Stat(T_stats idx, object val)
-    {
-        stats[(int)idx] = val;
+    public double Stat_Calc(double val, double flat, double perc) {
+        return val + flat * perc;
     }
-
-   
-
 }

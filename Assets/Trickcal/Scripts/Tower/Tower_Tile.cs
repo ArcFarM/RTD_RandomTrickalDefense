@@ -12,21 +12,25 @@ public class Tower_Tile : MonoBehaviour
     Renderer renderer;
 
     //이 타일에 설치될 타워
-    public GameObject tower = null;
+    GameObject tower = null;
 
     //타워 업그레이드 가능 표시 화살표
     public GameObject up_arrow;
-
-    //위치 편하게 찾기
-    int row = 0, col = 0;
-
-    public int get_row() { return row; }
-    public int get_col() { return col; }
-    public void set_rc (int r, int c) { row = r; col = c; }
+    GameObject clone_arrow;
 
     private void Start() {
         renderer = GetComponent<Renderer>();
-        if(up_arrow != null ) up_arrow.SetActive(false);
+        if(up_arrow != null) up_arrow.SetActive(false);
+
+        Vector2 new_pos = transform.position;
+        new_pos.y = transform.position.y + 2;
+
+        clone_arrow = Instantiate(up_arrow, new_pos, Quaternion.identity);
+        clone_arrow.transform.Rotate(180f, 0f, 0f);
+        
+        clone_arrow.SetActive(false);
+
+        clone_arrow.GetComponent<Renderer>().sortingOrder = 2;
     }
 
     private void Update() {
@@ -41,8 +45,7 @@ public class Tower_Tile : MonoBehaviour
 
     //타워를 통째로 반환 (설치된 타워 수정용)
     public GameObject Get_Tower() {
-        GameObject copy = tower;
-        return copy;
+        return tower;
     }
 
     //설치된 타워를 수정, nullable 이유 = 타워 판매 가능
@@ -97,26 +100,10 @@ public class Tower_Tile : MonoBehaviour
 
     //업그레이드 가능 화살표 표시 및 지우기
     public void Show_UpArrow() {
-        Vector3 new_pos = transform.position;
-        new_pos.y = transform.position.y + 2;
-        up_arrow.transform.position = new_pos;
-        
-        up_arrow.SetActive(true);
+        clone_arrow.SetActive(true);
     }
 
     public void Hide_UpArrow() {
-        up_arrow.SetActive(false);
-    }
-
-    IEnumerator Arrow_Test() {
-        for(int i = 0; i < 10; i++) {
-            Debug.Log("Arrow show");
-            Show_UpArrow();
-            yield return new WaitForSeconds(1.0f);
-            Debug.Log("Arrow Hide");
-            Hide_UpArrow();
-            yield return new WaitForSeconds(2.0f);
-        }
-
+        clone_arrow.SetActive(false);
     }
 }

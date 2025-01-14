@@ -44,12 +44,19 @@ public class GameManager : MonoBehaviour
         Enemys = l;
     }
 
-    //TODO : 타일 리스트 <<< 현재 게임 내에 설치된 타워 리스트
-    private List<GameObject> tiles = new List<GameObject>();
     //현재 게임 내에 존재하는 타워의 종류와 갯수를 저장할 딕셔너리
     Dictionary<string, int> tower_count = new Dictionary<string, int>();
-    public List <GameObject> Get_Tiles(){ return tiles; }
-    public void Set_Tiles(List<GameObject> l) { tiles = l; }
+    public int Get_dict(string str) {
+        if (tower_count.ContainsKey(str))
+            return tower_count[str];
+        else return -1;
+    }
+
+    public void Set_dict(string str, int val) {
+        if (tower_count.ContainsKey(str)) tower_count[str] = val;
+        else tower_count.Add(str, 1);
+        if (tower_count[str] < 0) tower_count[str] = 0;
+    }
 
     public int Get_Tower_Count(string id) {
         if (tower_count.ContainsKey(id)) { return tower_count[id]; }

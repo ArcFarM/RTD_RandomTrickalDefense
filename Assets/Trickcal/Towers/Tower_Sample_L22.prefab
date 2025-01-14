@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3327805449451770304}
   - component: {fileID: 7064357784820537767}
-  - component: {fileID: 4798305393897179870}
+  - component: {fileID: 371102405440303709}
   m_Layer: 0
-  m_Name: Tower_Sample_G
+  m_Name: Tower_Sample_L22
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 5727926785582322021}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.5, y: 18.5, z: 0}
+  m_LocalPosition: {x: -11.5, y: 18, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
-  m_Color: {r: 0, g: 1, b: 0, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.8258381, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4798305393897179870
+--- !u!114 &371102405440303709
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c384d7810bc80914e968af49a38a8eb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: TS_13
-  level: 0
+  id: TS_23
+  level: 1
   dmg: 0
   atk_spd: 0
   range: 0

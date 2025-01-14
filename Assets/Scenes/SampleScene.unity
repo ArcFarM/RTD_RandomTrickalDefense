@@ -800,7 +800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a9b185d7fdd54749968c662848d9682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  go: {fileID: 5727926785582322021, guid: 7d126af4bc455c344b1467c64636c9cd, type: 3}
+  go: {fileID: 1284619661}
 --- !u!4 &239016824
 Transform:
   m_ObjectHideFlags: 0
@@ -2590,7 +2590,10 @@ MonoBehaviour:
   - {fileID: 5727926785582322021, guid: d2890abaf27441346bd921642bdbdc46, type: 3}
   - {fileID: 5727926785582322021, guid: 6e14e30c4d334d94ab0d6e228cbf879c, type: 3}
   - {fileID: 5727926785582322021, guid: 35c5c72ae9a82fd40badd63a433eb778, type: 3}
-  Lv2_Towers: []
+  Lv2_Towers:
+  - {fileID: 5727926785582322021, guid: 83d110d69a20d244fbcfb5ec1ec2e70b, type: 3}
+  - {fileID: 5727926785582322021, guid: 38445fd4945a1de4f883173a343a381f, type: 3}
+  - {fileID: 5727926785582322021, guid: d7f64bdfc3774df4ab50ed6cfae19113, type: 3}
   Lv3_Towers: []
   Lv4_Towers: []
   Lv5_Towers: []

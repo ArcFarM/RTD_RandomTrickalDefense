@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,17 +18,29 @@ public class GroundManager : MonoBehaviour
      * 구현할 기능 : 키보드 입력에 반응하여 변하는 기능 넣기
      */
     private void Start() {
-        for(int i = 0; i < row; i++) {
-            for(int j = 0; j < col; j++) {
-                tiles[i].GetComponent<Tower_Tile>().set_rc(i, j);
-            }
-        }
     }
 
     //합성 가능한 타워 표시
     public void React_up() {
-        //TODO : 코루틴에는 타워 리스트가 여러개 있는데, 이중 무슨 타워가 몇 개 있는 지 재는 것을 사용
         //2개 이상 존재하되 5단계가 아닌 타워에 해당하는 id를 가진 타일을 전부 밝게 빛나게 실시
+        for(int i = 0; i < tiles.Count; i++) {
+            Tower_Tile tt = tiles[i].GetComponent<Tower_Tile>();
+            if (tt.Get_Tower() != null) {
+                TowerStats ts = tt.Get_Tower().GetComponent<TowerStats>();
+                string tower_id = ts.id;
+                //타일이 타워가 있고, 해당 타워가 2개 이상 존재한다면
+                if (GameManager.Instance.Get_dict(tower_id) > 1 && ts.level < 5) {
+                    tt.Show_UpArrow();
+                }
+            }
+        }
+    }
+
+    public void React_end() {
+        for (int i = 0; i < tiles.Count; i++) {
+            Tower_Tile tt = tiles[i].GetComponent<Tower_Tile>();
+            tt.Hide_UpArrow();
+        }
     }
     
 }
