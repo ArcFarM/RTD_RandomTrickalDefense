@@ -25,14 +25,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //현재 자원 -> 별도 더미오브젝트가 수행할 예정(삭제)
-    public int life;
-    public int leaf;
-    public int mocaron;
-    public int coupon;
     //현재 스테이지 넘버
     public int wave;
-    public TMP_Text Life_Count;
 
     //적을 관리할 리스트 : 현재 생존해 있는 적들과 그 정보를 저장
     private List<GameObject> Enemys = new List<GameObject>();
@@ -93,13 +87,6 @@ public class GameManager : MonoBehaviour
         return All_Towers[lvl][idx];
     }
 
-    
-
-
-    public void Life_Decrease(int damage){
-        life -= damage;
-        Life_Count.text = life.ToString();
-    }
 
     //싱글톤 설정
     void Awake()
@@ -116,7 +103,6 @@ public class GameManager : MonoBehaviour
     }
 
     void Start(){
-        Life_Count.text = life.ToString();
         //딕셔너리 초기화
         All_Towers.Add(Lv1_Towers);
         All_Towers.Add(Lv2_Towers);

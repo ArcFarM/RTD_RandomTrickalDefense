@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static EnumDict;
 using static EventManager;
@@ -18,6 +19,12 @@ public class Resource_Manager : MonoBehaviour
 
     //목숨
     int life;
+
+    //디스플레이 할 텍스트들
+    public TMP_Text t_select_text;
+    public TMP_Text t_normal_text;
+    public TMP_Text t_up_text;
+    public TMP_Text life_text;
 
     //재화 get & set
     public void set_normal(int value) {  t_normal = value; }
