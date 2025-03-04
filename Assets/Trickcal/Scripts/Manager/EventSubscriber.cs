@@ -5,6 +5,14 @@ using static EventManager;
 
 public static class EventSubscriber
 {
+    //이벤트에 사용할 매니저 오브젝트들
+    public static GameObject gameManager;
+    public static GameObject enemyManager;
+    public static GameObject towerManager;
+    public static GameObject groundManager;
+    public static GameObject tileManager;
+    public static GameObject resourceManager;
+
     //이벤트 구독 및 해제
 
     //스펠 구매 관련
@@ -16,13 +24,6 @@ public static class EventSubscriber
     public static void OnRndmoneyDisable() { OnRndmoney -= Potion_Method; }
     public static void OnRndupEnable() { OnRndup += Rndup_Method; }
     public static void OnRndupDisable() { OnRndup -= Rndup_Method; }
-    //타워 설치 가능 발판 상호작용 관련
-    //public static void OnTowerbuyEnable() { OnTowerbuy += Towerbuy_Method(go); }
-    //public static void OnTowerbuyDisable() { OnTowerbuy -= Towerbuy_Method(go); }
-    public static void OnTowerupEnable() { OnTowerup += Towerup_Method; }
-    public static void OnTowerupDisable() { OnTowerup -= Towerup_Method; }
-    public static void OnTowersellEnable() { OnTowersell += Towersell_Method; }
-    public static void OnTowersellDisable() { OnTowersell -= Towersell_Method; }
 
     static void Allup_Method()
     {
@@ -44,10 +45,13 @@ public static class EventSubscriber
         //TODO : 무작위 타워 (단, 엘다인 타워 제외)의 등급을 1 올림
     }
 
-    static void Towerbuy_Method(GameObject go) {
-    }
-    static void Towerup_Method() {
-    }
-    static void Towersell_Method() {
+    //적 관련 이벤트
+    public static void OnEnemyEndEnable() { OnEnemyEnd += EnemyEnd_Method; }
+    public static void OnEnemyEndDisable() { OnEnemyEnd -= EnemyEnd_Method; }
+
+    static void EnemyEnd_Method() {
+        Resource_Manager rm = resourceManager.GetComponent<Resource_Manager>();
+        //목숨 1 차감
+        rm.set_life(rm.get_life() - 1);
     }
 }

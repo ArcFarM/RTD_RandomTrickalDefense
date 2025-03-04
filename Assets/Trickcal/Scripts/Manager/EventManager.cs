@@ -17,22 +17,23 @@ public static class EventManager
     //랜덤 업그레이드 스펠 구매
     public static event EventDelegate OnRndup;
 
-    //타워 관련 이벤트
-    //타워 건설 가능 지역 빛나기
-    public static event EventDelegate OnTowerbuy;
-    //타워 합성 가능 지역 빛나기
-    public static event EventDelegate OnTowerup;
-    //타워 판매 가능 지역 빛나기
-    public static event EventDelegate OnTowersell;
-
     //적 관련 이벤트
-    //적 스폰
     //적 사망
+    public static event EventDelegate OnEnemyDeath;
     //적 최종 지점 도달
+    public static event EventDelegate OnEnemyEnd;
+    //보스 사망
+    public static event EventDelegate OnBossDeath;
     //게임 진행 관련 이벤트
+
     //웨이브 시작
+    public static event EventDelegate OnWaveStarted;
     //웨이브 종료
+    public static event EventDelegate OnWaveEnded;
+    //게임 시작
+    public static event EventDelegate OnGameStart;
     //게임 오버
+    public static event EventDelegate OnGameOver;
 
     //이벤트 호출
 
@@ -55,40 +56,30 @@ public static class EventManager
         OnRndup?.Invoke();
     }
 
-    //타워 이벤트
-    public static void EventTrigger_OnTowerbuy() {
-        OnTowerbuy?.Invoke();
-    }
-    public static void EventTrigger_OnTowerup() {
-        OnTowerup?.Invoke();
-    }
-    public static void EventTrigger_OnTowersell() {
-        OnTowersell?.Invoke();
-    }
-
     //적 이벤트
-    public static void EventTrigger_OnEnemySpawn() {
-
-    }
     public static void EventTrigger_OnEnemyEnd() {
-
+        OnEnemyEnd?.Invoke();
     }
 
-    public static void EventTrigger_OnEnemyDead() {
-
+    public static void EventTrigger_OnEnemyDeath() {
+        OnEnemyDeath?.Invoke();
     }
+    public static void EventTrigger_OnBossDeath() {
+        OnBossDeath?.Invoke();
+    }
+
     //진행 이벤트
     public static void EventTrigger_OnWaveStarted() {
-
+        OnWaveStarted?.Invoke();
     }
     public static void EventTrigger_OnWaveEnded() {
-
+        OnWaveEnded?.Invoke();
     }
     public static void EventTrigger_OnGameStart() {
-
+        OnGameStart?.Invoke();
     }
     public static void EventTrigger_OnGameOver() {
-
+        OnGameOver?.Invoke();
     }
   
 }

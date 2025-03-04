@@ -42,7 +42,7 @@ public class Enemy_Move : MonoBehaviour
         else if(next == null)
         {
             //TODO : 오브젝트 통과 이벤트
-
+            EventManager.EventTrigger_OnEnemyEnd();
         }
     }
 }
